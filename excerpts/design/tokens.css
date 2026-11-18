@@ -1,0 +1,375 @@
+/*
+ * Design tokens. Light and dark, shadcn/ui naming.
+ * Source of truth for colors. DESIGN.md explains how to use them.
+ *
+ * Fonts (Google Fonts), load once per app:
+ * https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&family=Atkinson+Hyperlegible+Mono:wght@400;500&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&family=Mitr:wght@500;600&display=swap
+ *
+ * Dark mode: add class "dark" on <html> (shadcn default).
+ */
+
+:root {
+  color-scheme: light;
+
+  /* Surfaces and text */
+  --background: #F8F4EC;
+  --foreground: #1F1B16;
+  --card: #FFFDF8;
+  --card-foreground: #1F1B16;
+  --popover: #FFFDF8;
+  --popover-foreground: #1F1B16;
+  --muted: #EFE9DC;
+  --muted-foreground: #5F574B;
+  --secondary: #EFE9DC;
+  --secondary-foreground: #1F1B16;
+
+  /* The one accent: grape violet */
+  --primary: #5B34DA;
+  --primary-foreground: #FFFFFF;
+  --primary-hover: #4A27BF;
+  --accent: #EBE4FA;            /* hover and selected surface */
+  --accent-foreground: #43229F;
+  --ring: #5B34DA;
+
+  /* Playful secondary: lime highlighter. Site only, never text color. */
+  --highlight: #C9F25A;            /* sticky notes, sticker fills */
+  --highlight-foreground: #1F1B16;
+  --highlight-band: #C9F25A;       /* band behind highlighted words */
+
+  /* Tactile edge: the solid outline and the hard "lip" under buttons and cards */
+  --edge: #1F1B16;
+  --primary-edge: #1F1B16;
+  --edge-width: 1.5px;
+  --lip: 0 3px 0 var(--edge);      /* site buttons, site cards */
+  --lip-sm: 0 2px 0 var(--edge);   /* app buttons */
+
+  /* Lines */
+  --border: #DDD5C4;            /* hairlines, decorative only */
+  --input: #1F1B16;             /* control outlines = edge */
+
+  --destructive: #B4232C;
+  --destructive-foreground: #FFFFFF;
+
+  /* Sidebar (second neutral layer) */
+  --sidebar: #F1ECE1;
+  --sidebar-foreground: #1F1B16;
+  --sidebar-primary: #5B34DA;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #EBE4FA;
+  --sidebar-accent-foreground: #43229F;
+  --sidebar-border: #DDD5C4;
+  --sidebar-ring: #5B34DA;
+
+  /* Email status: text/icon color, then tint surface. Always with icon + label. */
+  --status-queued: #5F574B;
+  --status-queued-bg: #EFE9DC;
+  --status-sent: #0B6A86;
+  --status-sent-bg: #DDF0F2;
+  --status-delivered: #17703F;
+  --status-delivered-bg: #DFF2DF;
+  --status-delivery-delayed: #8A5A00;
+  --status-delivery-delayed-bg: #FAEBC8;
+  --status-bounced: #B4321A;
+  --status-bounced-bg: #FBE3D9;
+  --status-complained: #A3266F;
+  --status-complained-bg: #F8E0EA;
+  --status-failed: #A61B2B;
+  --status-failed-bg: #F9DEDD;
+  --status-suppressed: #3F392F;
+  --status-suppressed-bg: #E4DCCB;
+
+  /* Generic feedback maps onto status hues */
+  --success: var(--status-delivered);
+  --success-bg: var(--status-delivered-bg);
+  --warning: var(--status-delivery-delayed);
+  --warning-bg: var(--status-delivery-delayed-bg);
+  --info: var(--status-sent);
+  --info-bg: var(--status-sent-bg);
+
+  /* Code */
+  --code: #EFE9DC;
+  --code-foreground: #1F1B16;
+  --code-keyword: #5B34DA;
+  --code-string: #17703F;
+  --code-number: #A3266F;
+  --code-comment: #6B6255;
+
+  /* Charts. Two categorical series plus one neutral. Status hues are never series colors.
+     Validated with the dataviz palette checker on --background (CVD, lightness band, 3:1). */
+  --chart-1: #5B34DA;            /* first series (transactional), single-series lines */
+  --chart-2: #2A8BC9;            /* second series (broadcast) */
+  --chart-3: #8C8375;            /* context: previous period, "other" */
+  --chart-4: #8A5A00;            /* failed in the daily outcomes chart: amber, apart from red bounced and grape complained */
+  --chart-grid: var(--border);   /* gridlines and axes, 1px solid */
+  --chart-limit: var(--destructive); /* safe-limit line */
+  --meter-track: #E4DCCB;
+
+  /* Danger surface for blocking problems (paused, failed payment) */
+  --danger: var(--status-failed);
+  --danger-bg: var(--status-failed-bg);
+
+  /* Modal backdrop: flat, no blur */
+  --scrim: rgb(31 27 22 / 0.5);
+
+  /* Overlays (popover, toast, dialog): edge outline plus a hard lip. No blur anywhere. */
+  --shadow-overlay: 0 4px 0 var(--edge);
+
+  /* Type */
+  --font-display: "Mitr", "Atkinson Hyperlegible Next", system-ui, sans-serif; /* headings, Latin and Thai */
+  --font-sans: "Atkinson Hyperlegible Next", "Anuphan", system-ui, sans-serif;
+  --font-mono: "Atkinson Hyperlegible Mono", "Anuphan", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --text-xs: 0.75rem;     /* 12  meta, Latin only */
+  --text-sm: 0.8125rem;   /* 13  table cells, labels */
+  --text-base: 0.875rem;  /* 14  app body */
+  --text-md: 1rem;        /* 16  site and docs body */
+  --text-lg: 1.125rem;    /* 18  section title */
+  --text-xl: 1.375rem;    /* 22  page title */
+  --text-2xl: 1.75rem;    /* 28  docs h1 */
+  --text-display: clamp(2.125rem, 1.4rem + 3.2vw, 3.5rem); /* site hero only */
+
+  --leading-tight: 1.2;   /* Latin headings */
+  --leading-ui: 1.45;     /* controls, table cells */
+  --leading-body: 1.6;    /* prose */
+  --leading-th-tight: 1.4;  /* Thai headings, floor */
+  --leading-th-ui: 1.55;    /* Thai controls, table cells */
+  --leading-th-body: 1.75;  /* Thai prose */
+
+  /* Shape and space */
+  --radius: 0.5rem;       /* 8px. sm 6, md 8, lg 12 */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  /* Scale is 4px based: 0, 4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 96. Nothing else. */
+  --space-0: 0;
+  --space-5: 1.25rem;
+  --space-10: 2.5rem;
+
+  /* Spacing standard: components use these names, never raw numbers.
+     Rules and the full table: DESIGN.md §Spacing and sizing standard. */
+  --control-h-sm: 2rem;          /* 32 nav items, segmented, small buttons */
+  --control-h: 2.25rem;          /* 36 default button, input, select */
+  --control-h-lg: 3rem;          /* 48 site CTA */
+  --control-pad-x-sm: var(--space-3);  /* 12 */
+  --control-pad-x: var(--space-4);     /* 16 */
+  --control-pad-x-lg: var(--space-5);  /* 20 */
+  --icon-gap: var(--space-2);          /* 8 icon to label, everywhere */
+  --inline-gap: var(--space-2);        /* 8 between buttons, chips, toolbar items */
+  --badge-h: 1.5rem;                   /* 24 */
+  --badge-pad-x: var(--space-2);       /* 8 */
+
+  --field-label-gap: var(--space-2);   /* 8 label to control */
+  --field-hint-gap: var(--space-1);    /* 4 control to hint or error */
+  --form-gap: var(--space-4);          /* 16 field to field */
+  --group-gap: var(--space-6);         /* 24 group to group, header to toolbar */
+
+  --card-pad: var(--space-6);          /* 24 site and docs cards */
+  --card-pad-app: var(--space-4);      /* 16 app panels, stat tiles */
+  --modal-pad: var(--space-6);         /* 24 all sides */
+  --modal-gap: var(--space-4);         /* 16 title, body, actions */
+  --banner-pad: var(--space-3) var(--space-4);  /* 12 / 16 */
+  --toast-pad: var(--space-3) var(--space-4);   /* 12 / 16 */
+  --cell-pad-y: var(--space-3);        /* 12 table rows */
+  --cell-pad-y-compact: var(--space-2);/* 8 dense admin tables */
+  --cell-pad-x: var(--space-3);        /* 12 between columns */
+  --cell-pad-x-edge: var(--space-4);   /* 16 first and last column */
+
+  --nav-item-h: var(--control-h-sm);   /* 32 */
+  --nav-pad: var(--space-3);           /* 12 sidebar inner padding */
+  --nav-gap: var(--space-1);           /* 4 between items */
+  --nav-group-gap: var(--space-6);     /* 24 between groups */
+
+  --page-pad-x: var(--space-8);        /* 32 app content */
+  --page-pad-y: var(--space-8);        /* 32 */
+  --section-gap-app: var(--space-8);   /* 32 between page sections in the app */
+  --site-gutter: var(--space-6);       /* 24 site and docs */
+  --site-section-y: var(--space-24);   /* 96 between site sections */
+  --tap-min: 2.75rem;                  /* 44 minimum touch target on touch screens */
+
+  /* App shell per device (DESIGN.md §Devices) */
+  --sidebar-w: 13.5rem;                /* 216 desktop sidebar */
+  --rail-w: 4rem;                      /* 64 tablet icon rail */
+  --tabbar-h: 3.5rem;                  /* 56 mobile bottom tab bar, plus env(safe-area-inset-bottom) */
+  --sheet-max-h: 90dvh;                /* mobile bottom sheet */
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 120ms;
+  --duration-base: 180ms;
+}
+
+/* Thai needs more vertical room: heights grow, horizontal padding stays. */
+:lang(th) {
+  --control-h-sm: 2.25rem;  /* 36 */
+  --control-h: 2.5rem;      /* 40 */
+  --badge-h: 1.75rem;       /* 28 */
+}
+
+/* Below 768px: tighter page edges and sections; component padding unchanged. */
+@media (max-width: 767px) {
+  :root {
+    --page-pad-x: var(--space-4);      /* 16 */
+    --page-pad-y: var(--space-6);      /* 24 */
+    --site-gutter: var(--space-4);     /* 16 */
+    --site-section-y: var(--space-16); /* 64 */
+    --modal-pad: var(--space-4);       /* 16 */
+  }
+}
+
+.dark {
+  color-scheme: dark;
+
+  --background: #1B1815;
+  --foreground: #F3EEE4;
+  --card: #24201C;
+  --card-foreground: #F3EEE4;
+  --popover: #24201C;
+  --popover-foreground: #F3EEE4;
+  --muted: #2B2621;
+  --muted-foreground: #B3A998;
+  --secondary: #2B2621;
+  --secondary-foreground: #F3EEE4;
+
+  --primary: #B9A5FF;
+  --primary-foreground: #1D1140;
+  --primary-hover: #CBBCFF;
+  --accent: #2F2747;
+  --accent-foreground: #D6CBFF;
+  --ring: #B9A5FF;
+
+  --highlight: #C9F25A;
+  --highlight-foreground: #1F1B16;
+  --highlight-band: #55661A;
+
+  --edge: #7A7064;
+  --primary-edge: #6A50CF;
+
+  --border: #37312A;
+  --input: #7A7064;
+
+  --destructive: #FF8A8A;
+  --destructive-foreground: #3A0A0D;
+
+  --sidebar: #151210;
+  --sidebar-foreground: #F3EEE4;
+  --sidebar-primary: #B9A5FF;
+  --sidebar-primary-foreground: #1D1140;
+  --sidebar-accent: #2F2747;
+  --sidebar-accent-foreground: #D6CBFF;
+  --sidebar-border: #37312A;
+  --sidebar-ring: #B9A5FF;
+
+  --status-queued: #B3A998;
+  --status-queued-bg: #2B2621;
+  --status-sent: #6CCDE6;
+  --status-sent-bg: #12303A;
+  --status-delivered: #7FDC9C;
+  --status-delivered-bg: #172E1D;
+  --status-delivery-delayed: #F0BE5A;
+  --status-delivery-delayed-bg: #33270C;
+  --status-bounced: #FF9B7F;
+  --status-bounced-bg: #3A1B12;
+  --status-complained: #F58CC6;
+  --status-complained-bg: #3A152B;
+  --status-failed: #FF8A94;
+  --status-failed-bg: #3B161B;
+  --status-suppressed: #D8CFBF;
+  --status-suppressed-bg: #37312A;
+
+  --code: #2B2621;
+  --code-foreground: #F3EEE4;
+  --code-keyword: #B9A5FF;
+  --code-string: #7FDC9C;
+  --code-number: #F58CC6;
+  --code-comment: #A0968A;
+
+  --chart-1: #957EF3;
+  --chart-2: #1F7FAE;
+  --chart-3: #8A8173;
+  --chart-4: #B8800F;
+  --meter-track: #37312A;
+  --scrim: rgb(0 0 0 / 0.6);
+
+  --shadow-overlay: 0 4px 0 var(--edge);
+}
+
+/* ---- Tailwind v4 mapping (app.css in the Vite app). Delete if on Tailwind v3. ---- */
+/* --font-sans and --font-mono in :root already override Tailwind's defaults, so they are not remapped here. */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-status-queued: var(--status-queued);
+  --color-status-queued-bg: var(--status-queued-bg);
+  --color-status-sent: var(--status-sent);
+  --color-status-sent-bg: var(--status-sent-bg);
+  --color-status-delivered: var(--status-delivered);
+  --color-status-delivered-bg: var(--status-delivered-bg);
+  --color-status-delivery-delayed: var(--status-delivery-delayed);
+  --color-status-delivery-delayed-bg: var(--status-delivery-delayed-bg);
+  --color-status-bounced: var(--status-bounced);
+  --color-status-bounced-bg: var(--status-bounced-bg);
+  --color-status-complained: var(--status-complained);
+  --color-status-complained-bg: var(--status-complained-bg);
+  --color-status-failed: var(--status-failed);
+  --color-status-failed-bg: var(--status-failed-bg);
+  --color-status-suppressed: var(--status-suppressed);
+  --color-status-suppressed-bg: var(--status-suppressed-bg);
+  --color-highlight: var(--highlight);
+  --color-highlight-foreground: var(--highlight-foreground);
+  --color-highlight-band: var(--highlight-band);
+  --color-edge: var(--edge);
+  --color-primary-edge: var(--primary-edge);
+  --color-code: var(--code);
+  --color-code-foreground: var(--code-foreground);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-grid: var(--chart-grid);
+  --color-chart-limit: var(--chart-limit);
+  --color-meter-track: var(--meter-track);
+  --color-success: var(--success);
+  --color-success-bg: var(--success-bg);
+  --color-warning: var(--warning);
+  --color-warning-bg: var(--warning-bg);
+  --color-danger: var(--danger);
+  --color-danger-bg: var(--danger-bg);
+  --font-display: "Mitr", "Atkinson Hyperlegible Next", system-ui, sans-serif;
+  --shadow-lip: var(--lip);
+  --shadow-lip-sm: var(--lip-sm);
+  --shadow-pop: var(--shadow-overlay);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 4px);
+}
